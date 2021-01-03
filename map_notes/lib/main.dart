@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:map_notes/screens/homeScreen.dart';
-import 'package:map_notes/screens/loginScreen.dart';
-import 'package:map_notes/screens/noteScreen.dart';
+import 'package:map_notes/screens/home_screen.dart';
+import 'package:map_notes/screens/login_screen.dart';
+import 'package:map_notes/screens/note_screen.dart';
+import 'package:map_notes/screens/otp_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         'homeScreen': (context) => MyHome(),
         'loginScreen': (context) => LoginScreen(),
         'noteScreen': (context) => NoteScreen(),
+        'otpScreen': (context) => OtpScreen(),
       },
     );
   }

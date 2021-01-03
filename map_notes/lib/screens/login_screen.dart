@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:map_notes/screens/widgetStack/loginWidgets.dart';
+import 'package:map_notes/screens/widgetStack/login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
