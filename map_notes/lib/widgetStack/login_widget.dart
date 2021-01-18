@@ -27,7 +27,7 @@ class LoginWidgets extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.height/1.5,
+                      height: MediaQuery.of(context).size.height / 1.5,
                       alignment: Alignment.bottomCenter,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -85,6 +85,7 @@ class LoginWidgets extends StatelessWidget {
                           ),
                           TextField(
                             decoration: InputDecoration(hintText: "9876546378"),
+                            keyboardType: TextInputType.phone,
                           ),
                           Container(
                             height: 90.0,

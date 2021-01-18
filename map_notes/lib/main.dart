@@ -1,59 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:map_notes/screens/home_screen.dart';
-import 'package:map_notes/screens/login_screen.dart';
-import 'package:map_notes/screens/note_screen.dart';
-import 'package:map_notes/screens/otp_screen.dart';
+import 'package:map_notes/pages/splash_page.dart';
+import 'package:map_notes/stores/login_store.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(App());
 
-class MyApp extends StatelessWidget {
+class App extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Map Notes",
-      theme: ThemeData.light(),
-      // home: MyHome(),
-      routes: {
-        '/': (context) => ScreensList(),
-        'homeScreen': (context) => MyHome(),
-        'loginScreen': (context) => LoginScreen(),
-        'noteScreen': (context) => NoteScreen(),
-        'otpScreen': (context) => OtpScreen(),
-      },
-    );
-  }
+  _AppState createState() => _AppState();
 }
 
-class ScreensList extends StatelessWidget {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "loginScreen");
-              },
-              child: Text("Login Screen"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "homeScreen");
-              },
-              child: Text("Home Screen"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "noteScreen");
-              },
-              child: Text("Note Screen"),
-            ),
-          ],
-        ),
+    return MultiProvider(
+      providers: [
+        Provider<LoginStore>(
+          create: (_) => LoginStore(),
+        )
+      ],
+      child: const MaterialApp(
+        home: SplashPage(),
       ),
     );
   }

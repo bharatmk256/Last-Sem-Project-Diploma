@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "958589493929",
+    "firebase_url": "https://map-notes-289911.firebaseio.com",
+    "project_id": "map-notes-289911",
+    "storage_bucket": "map-notes-289911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958589493929:android:c0143ed2ecea98b8a97fb8",
+        "android_client_info": {
+          "package_name": "com.bharatmk256.map_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958589493929-8makee1n3f4vuruv0r6n76v6ujmr4skd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlYaoQO1BkJ1d3psSR7fQstd4sF9mZw-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958589493929-8makee1n3f4vuruv0r6n76v6ujmr4skd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
