@@ -89,11 +89,13 @@ class _LoginPageState extends State<LoginPage> {
                                         width: 500,
                                         child: CountryCodePicker(
                                           dialogSize: Size(500, 500),
+                                          showOnlyCountryWhenClosed: true,
+                                          showFlagDialog: true,
                                           onChanged: (CountryCode countryCode) {
                                             selectedCountrycode =
                                                 countryCode.toString();
                                           },
-                                          showFlagMain: false,
+                                          showFlagMain: true,
                                           textStyle: TextStyle(
                                             fontSize: 20.0,
                                             color: Colors.black54,
@@ -104,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                                         decoration: BoxDecoration(
                                           border: Border(
                                             bottom: BorderSide(
-                                              color: Colors.black,
+                                              color: Colors.black45,
                                               style: BorderStyle.solid,
                                             ),
                                           ),
