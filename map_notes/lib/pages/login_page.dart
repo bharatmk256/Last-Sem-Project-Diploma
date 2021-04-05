@@ -10,12 +10,14 @@ import '../theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -176,8 +178,10 @@ class _LoginPageState extends State<LoginPage> {
                                           },
                                           color: MyColors.primaryColor,
                                           shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(14))),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(14),
+                                            ),
+                                          ),
                                           child: Container(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 8, horizontal: 8),
@@ -197,8 +201,10 @@ class _LoginPageState extends State<LoginPage> {
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         const BorderRadius.all(
-                                                            Radius.circular(
-                                                                20)),
+                                                      Radius.circular(
+                                                        20,
+                                                      ),
+                                                    ),
                                                     color: MyColors
                                                         .primaryColorLight,
                                                   ),
@@ -213,55 +219,6 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                         ),
                                       )
-                                      // start of raised Button
-                                      /*
-                                      RaisedButton(
-                                        // padding: EdgeInsets.only(
-                                        //   left: 40.0,
-                                        //   right: 40.0,
-                                        //   top: 15.0,
-                                        //   bottom: 15.0,
-                                        // ),
-                                         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(14))),
-                                        onPressed: () {
-                                          if (phoneController.text.isNotEmpty) {
-                                            loginStore.getCodeWithPhoneNumber(
-                                              context,
-                                              "+" +
-                                                  selectedCountrycode +
-                                                  phoneController.text
-                                                      .toString(),
-                                            );
-                                          } else {
-                                            loginStore
-                                                .loginScaffoldKey.currentState
-                                                .showSnackBar(
-                                              SnackBar(
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                                backgroundColor: Colors.red,
-                                                content: Text(
-                                                  'Please enter a phone number',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        color: Color(0xff00203F),
-                                        child: Text(
-                                          "SEND OTP",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        // shape: RoundedRectangleBorder(
-                                        //   borderRadius:
-                                        //       BorderRadius.circular(50.0),
-                                        // ),
-                                      )
-                                      */
-                                      // end of raised button
                                     ],
                                   ),
                                 ),

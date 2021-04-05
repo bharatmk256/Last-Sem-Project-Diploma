@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:map_notes/pages/home_page.dart';
 import 'package:map_notes/pages/login_page.dart';
 import 'package:map_notes/pages/otp_page.dart';
+import 'package:map_notes/services/add_user.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_store.g.dart';
@@ -24,11 +25,11 @@ abstract class LoginStoreBase with Store {
   GlobalKey<ScaffoldState> otpScaffoldKey = GlobalKey<ScaffoldState>();
 
   @observable
-  FirebaseUser firebaseUser;
+  User firebaseUser;
 
   @action
   Future<bool> isAlreadyAuthenticated() async {
-    firebaseUser = await _auth.currentUser();
+    firebaseUser = await _auth.currentUser;
     if (firebaseUser != null) {
       return true;
     } else {
@@ -45,7 +46,7 @@ abstract class LoginStoreBase with Store {
         phoneNumber: phoneNumber,
         timeout: const Duration(seconds: 60),
         verificationCompleted: (AuthCredential auth) async {
-          await _auth.signInWithCredential(auth).then((AuthResult value) {
+          await _auth.signInWithCredential(auth).then((value) {
             if (value != null && value.user != null) {
               print('Authentication successful');
               onAuthenticationSuccessful(context, value);
@@ -70,7 +71,7 @@ abstract class LoginStoreBase with Store {
             ));
           });
         },
-        verificationFailed: (AuthException authException) {
+        verificationFailed: (authException) {
           print('Error message: ' + authException.message);
           loginScaffoldKey.currentState.showSnackBar(SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -96,7 +97,7 @@ abstract class LoginStoreBase with Store {
   @action
   Future<void> validateOtpAndLogin(BuildContext context, String smsCode) async {
     isOtpLoading = true;
-    final AuthCredential _authCredential = PhoneAuthProvider.getCredential(
+    final AuthCredential _authCredential = PhoneAuthProvider.credential(
         verificationId: actualCode, smsCode: smsCode);
 
     await _auth.signInWithCredential(_authCredential).catchError((error) {
@@ -109,7 +110,7 @@ abstract class LoginStoreBase with Store {
           style: TextStyle(color: Colors.white),
         ),
       ));
-    }).then((AuthResult authResult) {
+    }).then((authResult) {
       if (authResult != null && authResult.user != null) {
         print('Authentication successful');
         onAuthenticationSuccessful(context, authResult);
@@ -117,13 +118,20 @@ abstract class LoginStoreBase with Store {
     });
   }
 
-  Future<void> onAuthenticationSuccessful(
-      BuildContext context, AuthResult result) async {
+  Future<void> onAuthenticationSuccessful(BuildContext context, result) async {
     isLoginLoading = true;
     isOtpLoading = true;
 
     firebaseUser = result.user;
 
+    AddUser(
+      email_id: "",
+      name: "",
+      phone_number: "",
+      profile_pic_url: "",
+      uid: firebaseUser.uid,
+      username: "",
+    );
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const HomePage()),
         (Route<dynamic> route) => false);

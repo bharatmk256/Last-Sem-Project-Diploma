@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:here_sdk/core.dart';
 import 'package:here_sdk/mapview.dart';
 import '../theme.dart';
+import '../mapServices/gesture_handler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -14,6 +15,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  void displayMenu(BuildContext context, store) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: Text("About"),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => UserProfile(),
+                ));
+              },
+            ),
+            ListTile(
+              title: Text("Logout"),
+              onTap: () {
+                store.signOut(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     SdkContext.init(IsolateOrigin.main);
@@ -27,36 +56,36 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text("This is testScreen"),
-            backgroundColor: MyColors.primaryColor,
+            elevation: 0,
+            title: TextField(
+              style: TextStyle(color: MyColors.primaryColor),
+              decoration: InputDecoration(
+                icon: Icon(Icons.search),
+                hintText: "Search",
+                border: InputBorder.none,
+              ),
+            ),
+            backgroundColor: Colors.white,
             actions: [
               GestureDetector(
-                  onTap: () {
-                    loginStore.signOut(context);
-                  },
-                  child: Icon(Icons.offline_bolt_outlined)),
-              GestureDetector(
-                child: Icon(Icons.person_outline_outlined),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UserProfile(
-                      imageURL:
-                          "https://ih1.redbubble.net/image.1003273014.6574/st,small,507x507-pad,600x600,f8f8f8.jpg",
-                      email: "Bharat@gmail.com",
-                      name: "Bharat",
-                      notes: "50",
-                      phone: "7898775567",
-                      username: "bharatmk",
-                    ),
-                  ));
-                },
+                onTap: () => displayMenu(context, loginStore),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    "https://ih1.redbubble.net/image.1003273014.6574/st,small,507x507-pad,600x600,f8f8f8.jpg",
+                  ),
+                  radius: 30,
+                ),
               ),
             ],
           ),
-          body: Center(
-            child: HereMap(
-              onMapCreated: _onMapCreated,
-            ),
+          body: Stack(
+            children: [
+              Center(
+                child: HereMap(
+                  onMapCreated: _onMapCreated,
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -66,13 +95,11 @@ class _HomePageState extends State<HomePage> {
   void _onMapCreated(HereMapController hereMapController) {
     hereMapController.mapScene.loadSceneForMapScheme(MapScheme.normalDay,
         (MapError error) {
-      if (error != null) {
-        print('Map scene not loaded. MapError: ${error.toString()}');
-        return;
+      if (error == null) {
+        GestureHandle(context, hereMapController);
+      } else {
+        print("Map scene not loaded. MapError: " + error.toString());
       }
-      const double distanceToEarthInMeaters = 8000;
-      hereMapController.camera.lookAtPointWithDistance(
-          GeoCoordinates(52.530932, 13.384915), distanceToEarthInMeaters);
     });
   }
 }

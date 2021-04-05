@@ -1,1 +1,7 @@
 /map_notes/plugins/here_sdk
+/map_notes/.dart_tool/
+/map_notes/.flutter-plugins
+/map_notes/.flutter-plugins-dependencies
+/map_notes/.packages
+/map_notes/build/
+/map_notes/.idea
