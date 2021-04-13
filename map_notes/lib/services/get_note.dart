@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:map_notes/widgetStack/edit_note_widget.dart';
+import 'package:map_notes/widgetStack/new_note_widget.dart';
 
 class GetNote {
   final String location;
@@ -13,11 +15,14 @@ class GetNote {
   CollectionReference notes = FirebaseFirestore.instance.collection('notes');
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future getNote() {
+  Future getNote(_context) {
     return notes
         .where('location', isEqualTo: location)
         .where('uid', isEqualTo: uid)
         .get()
-        .then((value) => {print(value.docs[0]['note'])});
+        .then((value) => {displayOldNote(_context, uid, value)})
+        .catchError((error) => {displayNote(_context, location, uid)});
   }
 }
+
+//print('Got this${value.docs[0]['note']}')

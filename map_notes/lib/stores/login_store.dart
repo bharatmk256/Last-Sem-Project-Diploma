@@ -131,7 +131,7 @@ abstract class LoginStoreBase with Store {
       profile_pic_url: "",
       uid: firebaseUser.uid,
       username: "",
-    );
+    ).addUser();
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const HomePage()),
         (Route<dynamic> route) => false);

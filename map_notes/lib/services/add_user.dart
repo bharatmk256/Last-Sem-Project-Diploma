@@ -20,8 +20,7 @@ class AddUser {
   }) {
     if (isUserDoesNotExist) {
       addUser();
-    } else {
-    }
+    } else {}
   }
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');

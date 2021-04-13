@@ -2,19 +2,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:map_notes/services/add_note.dart';
 
-Widget noteWidget({
+void displayNote(BuildContext context, String location, var uid) {
+  final titleTextEditingController = TextEditingController();
+  final noteTextEditingController = TextEditingController();
+  DateTime currentPhoneDate = DateTime.now();
+  Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+
+  showModalBottomSheet(
+    isScrollControlled: true,
+    context: context,
+    builder: (ctx) {
+      return Container(
+        height: MediaQuery.of(context).size.height / 1.2,
+        child: newNoteWidget(
+          location: location,
+          myTimeStamp: myTimeStamp,
+          noteTextEditingController: noteTextEditingController,
+          titleTextEditingController: titleTextEditingController,
+          uid: uid,
+        ),
+      );
+    },
+  );
+}
+
+Widget newNoteWidget({
   String location,
   var titleTextEditingController,
   var noteTextEditingController,
   var myTimeStamp,
   var uid,
 }) {
-  // // final titleTextEditingController = TextEditingController();
-  // // final noteTextEditingController = TextEditingController();
-  // String titleString;
-  // String noteString;
-  // String locationOfCurrentNote = location;
-
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Container(

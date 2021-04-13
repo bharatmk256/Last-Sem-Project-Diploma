@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:here_sdk/core.dart';
 import 'package:here_sdk/gestures.dart';
 import 'package:here_sdk/mapview.dart';
-import 'package:map_notes/pages/note_page.dart';
+import 'package:map_notes/widgetStack/new_note_widget.dart';
 import 'package:map_notes/services/get_note.dart';
 
 class GestureHandle {
@@ -19,32 +19,31 @@ class GestureHandle {
     uid = user.uid;
   }
 
-  void displayNote(BuildContext context, String location) {
-    final titleTextEditingController = TextEditingController();
-    final noteTextEditingController = TextEditingController();
-    DateTime currentPhoneDate = DateTime.now();
-    Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
-
-
-    GetNote(location: location, uid: uid).getNote();
-
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (ctx) {
-        return Container(
-          height: MediaQuery.of(context).size.height / 1.2,
-          child: noteWidget(
-            location: location,
-            myTimeStamp: myTimeStamp,
-            noteTextEditingController: noteTextEditingController,
-            titleTextEditingController: titleTextEditingController,
-            uid: uid,
-          ),
-        );
-      },
-    );
-  }
+  // void displayNote(BuildContext context, String location) {
+  //   final titleTextEditingController = TextEditingController();
+  //   final noteTextEditingController = TextEditingController();
+  //   DateTime currentPhoneDate = DateTime.now();
+  //   Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+  //
+  //   GetNote(location: location, uid: uid).getNote(_context);
+  //
+  //   showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     context: context,
+  //     builder: (ctx) {
+  //       return Container(
+  //         height: MediaQuery.of(context).size.height / 1.2,
+  //         child: newNoteWidget(
+  //           location: location,
+  //           myTimeStamp: myTimeStamp,
+  //           noteTextEditingController: noteTextEditingController,
+  //           titleTextEditingController: titleTextEditingController,
+  //           uid: uid,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   GestureHandle(BuildContext context, HereMapController hereMapController) {
     _context = context;
@@ -80,7 +79,9 @@ class GestureHandle {
 
       if (gestureState == GestureState.begin) {
         print(geoCoordinates);
-        displayNote(_context, geoCoordinates);
+
+        GetNote(location: geoCoordinates, uid: uid).getNote(_context);
+
         print("LongPress detected at: $geoCoordinates");
       }
       if (gestureState == GestureState.update) {

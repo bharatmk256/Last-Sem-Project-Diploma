@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: :heresdk-explore-4.6.3.0.4520.release:@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9635c0012e9c97facaa808a0e9b7813f/heresdk-explore-4.6.3.0.4520.release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9635c0012e9c97facaa808a0e9b7813f/heresdk-explore-4.6.3.0.4520.release/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
